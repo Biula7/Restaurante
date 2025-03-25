@@ -40,7 +40,6 @@ nav ul li a:hover {
     border-radius: 5px;
 }
 
-
 section {
     display: flex;
     flex-wrap: wrap;
@@ -49,19 +48,23 @@ section {
     padding: 20px;
 }
 
+article {
+    text-align: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 45%; /* Layout responsivo para telas maiores */
+}
 
-@media (min-width: 768px) {
-    main {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
+article img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
 
+@media (max-width: 767px) {
     article {
-        width: 45%;
-        background-color: white;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%; /* Ajusta os artigos para telas menores */
     }
 }
