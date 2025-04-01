@@ -1,18 +1,18 @@
-<!DOCTYPE html> <!-- Declara o tipo do documento como HTML5 -->
-<html lang="pt-BR"> <!-- Define o idioma principal da página como português do Brasil -->
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8, suportando acentos e caracteres especiais -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva para diferentes dispositivos -->
-    <title>Cardápio Online</title> <!-- Define o título da página exibido na aba do navegador -->
-    <link rel="stylesheet" href="style.css"> <!-- Importa a folha de estilos CSS para estilizar a página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio do Futuro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header> <!-- Representa o cabeçalho da página, geralmente contendo o título e elementos de identidade visual -->
+    <header>
         <h1>Original Restaurante</h1>
-        <img src="Original.png" alt="Logo do Restaurante"> <!-- Exibe a logo do restaurante -->
+        <img src="Original.png" alt="Logo do Restaurante">
     </header>
     
-    <nav> <!-- Define a área de navegação da página, contendo links para seções específicas -->
+    <nav>
         <ul>
             <li><a href="#entradas">Entradas</a></li>
             <li><a href="#principais">Pratos Principais</a></li>
@@ -20,39 +20,43 @@
         </ul>
     </nav>
     
-    <main> <!-- Representa o conteúdo principal da página, diferenciando-se de elementos secundários como cabeçalho e rodapé -->
-        <section id="entradas"> <!-- Agrupa os elementos relacionados à seção de entradas do cardápio -->
-            <h2>Entradas</h2>
-            <article> <!-- Representa um conteúdo independente dentro da seção, contendo informações sobre um item do cardápio -->
-                <img src="entrada.jpeg" alt="Empadinha">
-                <h3>Empadinha</h3>
-                <p><strong>R$ 20,00</strong></p> <!-- Exibe o preço do item -->
-            </article>
-        </section>
-        
-        <section id="principais"> <!-- Agrupa os elementos relacionados à seção de pratos principais -->
-            <h2>Pratos Principais</h2>
-            <article> <!-- Representa um prato principal do cardápio -->
-                <img src="prato_principal.jpeg" alt="Lasanha">
-                <h3>Lasanha</h3>
-                <p><strong>R$ 22,00</strong></p>
-            </article>
-        </section>
-        
-        <section id="sobremesas"> <!-- Agrupa os elementos relacionados à seção de sobremesas -->
-            <h2>Sobremesas</h2>
-            <article> <!-- Representa uma sobremesa do cardápio -->
-                <img src="torta_limao.jpeg" alt="Torta de Limão">
-                <h3>Torta de Limão</h3>
-                <p><strong>R$ 22,00</strong></p>
-            </article>
+    <main>
+        <section id="cardapio" aria-label="Cardápio do Restaurante">
+            <!-- Os itens do cardápio serão inseridos dinamicamente aqui -->
         </section>
     </main>
     
-    <footer> <!-- Representa o rodapé da página, geralmente contendo informações de contato e direitos autorais -->
+    <footer>
         <p>&copy; 2025 Original Restaurante</p>
         <p>Contato: (11) 99999-9999 | Instagram: @originalrest</p>
         <p>Horário de funcionamento: Seg - Dom, 10h às 22h</p>
     </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cardapio = [
+                { categoria: "entradas", nome: "Empadinha", preco: "R$ 20,00", imagem: "entrada.jpeg" },
+                { categoria: "principais", nome: "Lasanha", preco: "R$ 22,00", imagem: "prato_principal.jpeg" },
+                { categoria: "sobremesas", nome: "Torta de Limão", preco: "R$ 22,00", imagem: "torta_limao.jpeg" }
+            ];
+
+            const cardapioContainer = document.getElementById("cardapio");
+            
+            function criarItemCardapio(item) {
+                return `
+                    <article role="menuitem">
+                        <img src="${item.imagem}" alt="${item.nome}">
+                        <h3>${item.nome}</h3>
+                        <p><strong>${item.preco}</strong></p>
+                        <button aria-label="Adicionar ${item.nome} ao carrinho">Adicionar ao Carrinho</button>
+                    </article>
+                `;
+            }
+            
+            cardapio.forEach(item => {
+                cardapioContainer.innerHTML += criarItemCardapio(item);
+            });
+        });
+    </script>
 </body>
 </html>
