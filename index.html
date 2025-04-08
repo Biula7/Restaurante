@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardápio do Futuro</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Original Restaurante</h1>
+    <img src="imagens/Original.png" alt="Logo do Restaurante" />
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#entradas">Entradas</a></li>
+      <li><a href="#principais">Pratos Principais</a></li>
+      <li><a href="#sobremesas">Sobremesas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="cardapio" aria-label="Cardápio do Restaurante"></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Original Restaurante</p>
+    <p>Contato: (11) 99999-9999 | Instagram: @originalrest</p>
+    <p>Horário de funcionamento: Seg - Dom, 10h às 22h</p>
+  </footer>
+
+  <script>
+    fetch("/api/cardapio")
+      .then((res) => res.json())
+      .then((itens) => {
+        const container = document.getElementById("cardapio");
+        itens.forEach(item => {
+          const artigo = document.createElement("article");
+          artigo.innerHTML = `
+            <img src="imagens/${item.imagem}" alt="${item.nome}" />
+            <h3>${item.nome}</h3>
+            <p>${item.descricao}</p>
+            <p><strong>${item.preco}</strong></p>
+            <button aria-label="Adicionar ${item.nome} ao carrinho">Adicionar ao Carrinho</button>
+          `;
+          artigo.classList.add("menu-item");
+          container.appendChild(artigo);
+        });
+      });
+  </script>
+</body>
+</html>
